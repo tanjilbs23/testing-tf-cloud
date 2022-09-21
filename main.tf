@@ -8,18 +8,22 @@
 #   }
 # }
 
-provider "aws" {}
+# provider "aws" {}
 
-resource "aws_s3_bucket" "b" {
-  bucket = "my-test-bucket-sharebus-septembernew21"
+# resource "aws_s3_bucket" "b" {
+#   bucket = "my-test-bucket-sharebus-septembernew21"
 
-  tags = {
-    Name        = "my-test-bucket-sharebus-september21"
-    Environment = "dev"
-  }
-}
+#   tags = {
+#     Name        = "my-test-bucket-sharebus-september21"
+#     Environment = "dev"
+#   }
+# }
 
-resource "aws_s3_bucket_acl" "example" {
-  bucket = aws_s3_bucket.b.id
-  acl    = "private"
+# resource "aws_s3_bucket_acl" "example" {
+#   bucket = aws_s3_bucket.b.id
+#   acl    = "private"
+# }
+
+module "hello" {
+  source = "./lambda/hello"
 }
