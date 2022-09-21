@@ -7,11 +7,11 @@ resource "null_resource" "lambda_build" {
   triggers = {
     on_every_apply = uuid()
   }
+  # provisioner "local-exec" {
+  #   command = "cd ${path.module} && wget https://go.dev/dl/go1.19.1.linux-amd64.tar.gz && tar -xzf go1.19.1.linux-amd64.tar.gz"
+  # }
   provisioner "local-exec" {
-    command = "cd ${path.module} && wget https://go.dev/dl/go1.19.1.linux-amd64.tar.gz && tar -xzf go1.19.1.linux-amd64.tar.gz"
-  }
-  provisioner "local-exec" {
-    command = "cd ${path.module}/src && env GOOS=linux GOARCH=amd64 ${path.module}/go/bin/go build -o ../bin/hello"
+    command = "cd ${path.module}/src && wget https://go.dev/dl/go1.19.1.linux-amd64.tar.gz && tar -xzf go1.19.1.linux-amd64.tar.gz && env GOOS=linux GOARCH=amd64 ${path.module}/src/go/bin/go build -o ../bin/hello"
   }
 }
 
