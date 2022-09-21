@@ -8,10 +8,10 @@ resource "null_resource" "lambda_build" {
     on_every_apply = uuid()
   }
   provisioner "local-exec" {
-    command = "wget https://go.dev/dl/go1.19.1.linux-amd64.tar.gz && mkdir -p golang/go/bin && tar -C golang/go/bin -xzf go1.19.1.linux-amd64.tar.gz && export PATH=$PATH:golang/go/bin"
+    command = "wget https://go.dev/dl/go1.19.1.linux-amd64.tar.gz && tar -xzf go1.19.1.linux-amd64.tar.gz"
   }
   provisioner "local-exec" {
-    command = "cd ${path.module}/src && env GOOS=linux GOARCH=amd64 golang/go/bin/go build -o ../bin/hello"
+    command = "cd ${path.module}/src && env GOOS=linux GOARCH=amd64 go/bin/go build -o ../bin/hello"
   }
 }
 
