@@ -1,3 +1,13 @@
+terraform {
+  cloud {
+    organization = "personal-testing-terraform"
+
+    workspaces {
+      name = "testing-tf-cloud"
+    }
+  }
+}
+
 provider "aws" {}
 
 resource "aws_s3_bucket" "b" {
