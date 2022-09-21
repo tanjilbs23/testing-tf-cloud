@@ -8,7 +8,7 @@ resource "null_resource" "lambda_build" {
     on_every_apply = uuid()
   }
   provisioner "local-exec" {
-    command = "sudo tar -C /usr/local -xzf go1.19.1.linux-amd64.tar.gz && export PATH=$PATH:/usr/local/go/bin && go version"
+    command = "wget https://go.dev/dl/go1.19.1.linux-amd64.tar.gz && sudo tar -C /usr/local -xzf go1.19.1.linux-amd64.tar.gz && export PATH=$PATH:/usr/local/go/bin && go version"
   }
   provisioner "local-exec" {
     command = "cd ${path.module}/src && env GOOS=linux GOARCH=amd64 go build -o ../bin/hello"
