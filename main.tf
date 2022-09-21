@@ -1,17 +1,17 @@
-terraform {
-  cloud {
-    organization = "personal-testing-terraform"
+# terraform {
+#   cloud {
+#     organization = "personal-testing-terraform"
 
-    workspaces {
-      name = "testing-tf-cloud"
-    }
-  }
-}
+#     workspaces {
+#       name = "testing-tf-cloud"
+#     }
+#   }
+# }
 
 provider "aws" {}
 
 resource "aws_s3_bucket" "b" {
-  bucket = "my-test-bucket-sharebus-september21"
+  bucket = "my-test-bucket-sharebus-septembernew21"
 
   tags = {
     Name        = "my-test-bucket-sharebus-september21"
