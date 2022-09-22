@@ -11,7 +11,7 @@ resource "null_resource" "lambda_build" {
   #   command = "cd ${path.module} && wget https://go.dev/dl/go1.19.1.linux-amd64.tar.gz && tar -xzf go1.19.1.linux-amd64.tar.gz"
   # }
   provisioner "local-exec" {
-    command = "cd lambda/hello/src && wget https://go.dev/dl/go1.19.1.linux-amd64.tar.gz && tar -xzf go1.19.1.linux-amd64.tar.gz && env GOOS=linux GOARCH=amd64 lambda/hello/src/go/bin/go build -o ../bin/hello"
+    command = "cd lambda/hello/src && wget https://go.dev/dl/go1.19.1.linux-amd64.tar.gz && tar -xzf go1.19.1.linux-amd64.tar.gz && env GOOS=linux GOARCH=amd64 go/bin/go build -o ../bin/hello"
   }
 }
 
