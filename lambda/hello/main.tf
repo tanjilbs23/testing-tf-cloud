@@ -7,9 +7,6 @@ resource "null_resource" "lambda_build" {
   triggers = {
     on_every_apply = uuid()
   }
-  # provisioner "local-exec" {
-  #   command = "cd ${path.module} && wget https://go.dev/dl/go1.19.1.linux-amd64.tar.gz && tar -xzf go1.19.1.linux-amd64.tar.gz"
-  # }
   provisioner "local-exec" {
     command = "cd lambda/hello/src && wget https://go.dev/dl/go1.19.1.linux-amd64.tar.gz && tar -xzf go1.19.1.linux-amd64.tar.gz && env GOOS=linux GOARCH=amd64 go/bin/go build -o ../bin/hello"
   }
@@ -34,6 +31,7 @@ module "lambda_function" {
   description   = "testing go function"
   handler       = "hello.lambda_handler"
   runtime       = "go1.x"
+  publish       = true
 
   create_package          = false
   local_existing_package  = "${path.module}/bin/hello.zip"
@@ -54,4 +52,10 @@ module "lambda_function" {
   depends_on = [
     data.archive_file.lambda_go_zip
   ]
+}
+module "alias_refresh" {
+  source = "terraform-aws-modules/lambda/aws//modules/alias"
+
+  name          = "current-with-refresh"
+  function_name = module.lambda_function.lambda_function_name
 }
